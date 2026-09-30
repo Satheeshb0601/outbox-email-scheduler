@@ -176,7 +176,7 @@ export default function SettingsPage() {
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-semibold" style={{ color: '#111827' }}>Queue Status</h2>
             <a
-              href="http://localhost:3001/admin/queues"
+              href={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/admin/queues`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1 text-xs font-medium hover:underline"
@@ -212,7 +212,7 @@ export default function SettingsPage() {
             </div>
             <div className="flex justify-between">
               <span style={{ color: '#6b7280' }}>Bull Board</span>
-              <a href="http://localhost:3001/admin/queues" target="_blank" className="text-green-600 hover:underline">
+              <a href={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/admin/queues`} target="_blank" className="text-green-600 hover:underline">
                 localhost:3001/admin/queues
               </a>
             </div>

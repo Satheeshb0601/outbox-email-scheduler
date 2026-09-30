@@ -161,7 +161,7 @@ function SidebarContent() {
       {/* Bull Board Link */}
       <div className="px-3 pb-3">
         <a
-          href="http://localhost:3001/admin/queues"
+          href={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/admin/queues`}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 px-2 py-2 rounded-lg text-xs hover:bg-gray-100 transition-colors"

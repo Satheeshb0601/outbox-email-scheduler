@@ -4,6 +4,7 @@
  * 
  * Run with: npx ts-node src/dev-server.ts
  */
+// @ts-ignore
 import EmbeddedPostgres from 'embedded-postgres';
 import path from 'path';
 import dotenv from 'dotenv';
@@ -32,7 +33,7 @@ async function startEmbeddedPostgres() {
       await client.query(`
         SELECT 'CREATE DATABASE outbox_db'
         WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'outbox_db')
-      `).then(async (res) => {
+      `).then(async (res: any) => {
         if (res.rows.length > 0) {
           await client.query('CREATE DATABASE outbox_db');
           console.log('✅ Created database outbox_db');

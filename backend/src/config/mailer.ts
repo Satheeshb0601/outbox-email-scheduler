@@ -5,7 +5,18 @@ let transporter: nodemailer.Transporter | null = null;
 export async function getTransporter(): Promise<nodemailer.Transporter> {
   if (transporter) return transporter;
 
-  if (process.env.ETHEREAL_USER && process.env.ETHEREAL_PASS) {
+  if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASSWORD) {
+    // Production SMTP
+    transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT || '587'),
+      secure: process.env.SMTP_SECURE === 'true' || process.env.SMTP_PORT === '465',
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASSWORD,
+      },
+    });
+  } else if (process.env.ETHEREAL_USER && process.env.ETHEREAL_PASS) {
     // Use configured Ethereal credentials
     transporter = nodemailer.createTransport({
       host: 'smtp.ethereal.email',
@@ -17,7 +28,7 @@ export async function getTransporter(): Promise<nodemailer.Transporter> {
       },
     });
   } else {
-    // Auto-generate Ethereal test account
+    // Auto-generate Ethereal test account (Fallback for local dev)
     const testAccount = await nodemailer.createTestAccount();
     console.log('📧 Ethereal test account created:');
     console.log(`   User: ${testAccount.user}`);

@@ -9,7 +9,8 @@
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "dev:embedded": "ts-node-dev --respawn --transpile-only src/dev-server.ts",
     "migrate": "ts-node src/db/migrate.ts",
-    "worker": "ts-node-dev --respawn --transpile-only src/workers/emailWorker.ts"
+    "worker": "node dist/workers/emailWorker.js",
+    "worker:dev": "ts-node-dev --respawn --transpile-only src/workers/emailWorker.ts"
   },
   "dependencies": {
     "@bull-board/api": "^5.13.0",

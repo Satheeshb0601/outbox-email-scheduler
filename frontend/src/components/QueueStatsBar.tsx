@@ -45,7 +45,7 @@ export default function QueueStatsBar() {
         </span>
       ))}
       <a
-        href="http://localhost:3001/admin/queues"
+        href={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/admin/queues`}
         target="_blank"
         rel="noopener noreferrer"
         className="ml-auto text-xs hover:underline"
